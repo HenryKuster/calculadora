@@ -1,3 +1,6 @@
+para iniciar baixar os arquivos use ( npm i )
+
 Baxar o app ( Expo go ) no celular
 
 para iniciar o projeto ( npx expo start --tunnel )
+

@@ -1,70 +1,158 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { DarkTheme } from "@react-navigation/native";
+import { useState } from "react";
+import { StyleSheet, View, Text, Button, Pressable } from "react-native";
 
 export default function HomeScreen() {
+  const [valor, setValor] = useState("");
+  function numero(operacao: string) {
+    const atual = valor + "" + operacao;
+    console.log(atual);
+    setValor(atual);
+  }
+
+  function limpar() {
+    setValor("");
+  }
+
+  function calcular() {
+    const resultado = eval(valor);
+    setValor(resultado);
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.calculadora}>
+
+      <View style={styles.tela}>
+      <Text style={styles.telaTexto}> {valor} 2 + 2 = 5 </Text>
+      </View>
+
+      <View style={styles.calculadoraBotoes}>
+      <View style={styles.operadores}>
+        <Pressable style={styles.button} onPress={() => numero("+")}>
+          <Text style={styles.text}>+</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => numero("-")}>
+          <Text style={styles.text}>-</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => numero("/")}>
+          <Text style={styles.text}>/</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => numero("*")}>
+          <Text style={styles.text}>*</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.botoesNumeros}>
+      <Pressable style={styles.button} onPress={() => numero("1")}>
+          <Text style={styles.text}>1</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => numero("2")}>
+          <Text style={styles.text}>2</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => numero("3")}>
+          <Text style={styles.text}>3</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.botoesNumeros}>
+      <Pressable style={styles.button} onPress={() => numero("4")}>
+          <Text style={styles.text}>4</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => numero("5")}>
+          <Text style={styles.text}>5</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => numero("6")}>
+          <Text style={styles.text}>6</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.botoesNumeros}>
+      <Pressable style={styles.button} onPress={() => numero("7")}>
+          <Text style={styles.text}>7</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => numero("8")}>
+          <Text style={styles.text}>8</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => numero("9")}>
+          <Text style={styles.text}>9</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.botoesNumeros}>
+      <Pressable style={styles.button} onPress={() => numero("1")}>
+          <Text style={styles.text}>0</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => numero("2")}>
+          <Text style={styles.text}>.</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => limpar()}>
+          <Text style={styles.text}>CA</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.botaoIgual}>
+      <Pressable style={styles.button} onPress={() => calcular()}>
+          <Text style={styles.text}>=</Text>
+      </Pressable>
+
+       </View>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  calculadora: {
+    backgroundColor: "#282f3b",
+  },
+  tela: {
+    backgroundColor: '#f5f5f5',
+    width: '100%',
+    minHeight: 300,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+  },
+  telaTexto: {
+    margin: 10,
+    fontSize: 25,
+    color: 'black'
+  },
+  calculadoraBotoes: {
+    width: 400,
+    minHeight: 550
+  },
+  operadores: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: "auto",
+    minHeight: 80,
+  },
+  botoesNumeros: {
+    width: '100%',
+    minHeight: 90,
     flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+    flexWrap: 'wrap'
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  botaoIgual: {
+    display: "flex",
+    width: "auto",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  button: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    flexGrow: 1,
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    backgroundColor: "#282f3b",
+  },
+  text: {
+    fontSize: 25,
+    lineHeight: 50,
+    fontWeight: "bold",
+    // letterSpacing: 0.25,
+    color: "white",
   },
 });
