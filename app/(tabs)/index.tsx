@@ -23,7 +23,7 @@ export default function HomeScreen() {
     <View style={styles.calculadora}>
 
       <View style={styles.tela}>
-      <Text style={styles.telaTexto}> {valor} 2 + 2 = 5 </Text>
+      <Text style={styles.telaTexto}> {valor} </Text>
       </View>
 
       <View style={styles.calculadoraBotoes}>
